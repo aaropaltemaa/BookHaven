@@ -1,6 +1,6 @@
 # BookHaven
 
-BookHaven is a book management application designed to help users organize their reading lists, discover new books, 
+BookHaven is a book management application designed to help users organize their reading lists and discover new books.
 
 ## Features
 
