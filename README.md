@@ -14,11 +14,12 @@ BookHaven is a book management application designed to help users organize their
 
 ## Technologies Used
 
-- TypeScript
-- React
-- Node.js
-- Express
-- MongoDB
+- [TypeScript](https://www.typescriptlang.org/)
+- [React](https://reactjs.org/)
+- [Node.js](https://nodejs.org/)
+- [Express](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/)
+
   
 ## Acknowledgements
 
