@@ -1,0 +1,20 @@
+POST http://localhost:3001/api/books
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFwYWx0ZW1hYSIsImlkIjoiNjY5NTY1Y2QzYzVmMDRlYzUyOGVhN2FlIiwiaWF0IjoxNzIxMDY3NjgzLCJleHAiOjE3MjEwNzEyODN9.Le1WanuAQAwvv6V2hbukr8DkHH5GG6NQWhsIFY7IB70
+
+{
+    "title": "Crime and Punishment",
+    "author": "Fyodor Dostoevsky",
+    "description": "Crime and Punishment is a novel by the Russian author Fyodor Dostoevsky. It was first published in the literary journal The Russian Messenger in twelve monthly installments during 1866. It was later published in a single volume.",
+    "genre": "Novel",
+    "pages": 671,
+    "publisher": "The Russian Messenger",
+    "read": false,
+    "user": {
+        "username": "apaltemaa",
+        "name": "Aaro Paltemaa",
+        "email": "test@gmail.com",
+        "id": "669565cd3c5f04ec528ea7ae"
+    }
+
+}
