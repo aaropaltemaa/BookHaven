@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import BasicMenu from '../../Containers/BasicMenu';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import usePopover from '../../../hooks/usePopover';
 
 const NotificationBell = ({ iconColor }) => {
 
@@ -22,17 +22,7 @@ const NotificationBell = ({ iconColor }) => {
     const newNotifications = `You have ${notifications.length} notifications`
     const noNotifications = "You have no new notifications"
 
-    const [open, setOpen] = useState(false);
-    const [anchorEl, setAnchorEl] = useState(null);
-
-    const handleOpen = (event) => {
-        setAnchorEl(event.currentTarget);
-        setOpen(true);
-    }
-
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const { open, anchorEl, handleOpen, handleClose } = usePopover();
 
     return (
         <div>
@@ -44,7 +34,7 @@ const NotificationBell = ({ iconColor }) => {
                 >
                     <Badge
                         badgeContent={notifications.length}
-                        color="primary"
+                        color="secondary"
                     >
                         <NotificationsIcon />
                     </Badge>

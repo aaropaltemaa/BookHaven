@@ -2,7 +2,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from './assets/styles/Theme';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Menu from './components/Containers/Menu';
-import MenuHeader from './components/Containers/MenuHeader';
+import Header from './components/Containers/Header';
 import "./assets/styles/index.css";
 
 const App = () => {
@@ -10,7 +10,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <div>
         <Router>
-          <MenuHeader />
+          <Header />
           <Routes>
             <Route path="/" element={<Menu />} />
           </Routes>

@@ -4,10 +4,10 @@ import { blue } from '@mui/material/colors';
 const theme = createTheme({
     palette: {
         primary: {
-            main: blue[900],
+            main: "#1A2E47",
         },
         secondary: {
-            main: blue[200],
+            main: "#407ad6",
         },
     },
     components: {
