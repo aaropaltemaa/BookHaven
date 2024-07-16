@@ -10,8 +10,11 @@ A section where users can view the books they are currently reading, have finish
 ## Discover
 A feature to explore new books, including recommendations based on the user's reading history or preferences.
 
-## Reading Lists
-Customizable lists where users can organize books by genre, author, or any other criteria they choose.
+## User Profiles 
+Create and manage personal profiles with details such as name, age, and reading preferences.
+
+## Book Listing 
+Maintain lists of books you own, have read, or want to read using simple and intuitive controls.
 
 ## Search
 A tool to search for books by title, author, ISBN, or keywords.
