@@ -22,7 +22,7 @@ const AuthorizationMenu = ({ iconColor }) => {
         },
         user ? {
             id: 2,
-            label: "Logout",
+            label: "Log out",
             path: "/logout"
         } : {
             id: 2,

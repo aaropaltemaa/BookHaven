@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { initializeLoginFromStorage } from './reducers/loginReducer';
 import LogoutHandler from './components/Containers/LogoutHandler';
 import Notification from './components/UI/Notifications/Notification';
+import RegisterForm from './components/Containers/Forms/RegisterForm';
 
 const AppContent = () => {
   const location = useLocation();
@@ -23,13 +24,14 @@ const AppContent = () => {
   return (
     <div>
       <Notification />
-      {location.pathname !== '/login' && <Menu />}
+      {location.pathname !== '/login' && location.pathname !== '/register' && <Menu />}
       <div style={{ paddingTop: '100px' }}></div>
       <Header />
       <Routes>
         <Route path="/" element={<Menu />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/logout" element={<LogoutHandler />} />
+        <Route path="/register" element={<RegisterForm />} />
       </Routes>
     </div>
   );
