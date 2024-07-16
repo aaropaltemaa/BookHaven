@@ -19,6 +19,12 @@ Maintain lists of books you own, have read, or want to read using simple and int
 ## Search
 A tool to search for books by title, author, ISBN, or keywords.
 
+## Discover New Books 
+Explore recommendations based on genres, authors, or community favorites.
+  
+## Personalized Dashboard 
+View personalized recommendations, reading progress, and community updates on your dashboard.
+
 ## Wishlist
 A place for users to keep track of books they wish to read in the future.
 
@@ -27,16 +33,7 @@ Where users can customize their experience, manage account settings, and adjust 
 
 ## Help & Support
 Access to FAQs, contact information, and guides on how to use the application.
-
-
-- **User Profiles:** Create and manage personal profiles with details such as name, age, and reading preferences.
   
-- **Book Listing:** Maintain lists of books you own, have read, or want to read using simple and intuitive controls.
-  
-- **Discover New Books:** Explore recommendations based on genres, authors, or community favorites.
-  
-- **Personalized Dashboard:** View personalized recommendations, reading progress, and community updates on your dashboard.
-
 ## Technologies Used
 
 - [React](https://reactjs.org/)
