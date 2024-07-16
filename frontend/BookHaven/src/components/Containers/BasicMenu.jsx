@@ -1,6 +1,7 @@
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const BasicMenu = ({ anchorEl, handleClose, open, menuItems }) => {
 
@@ -14,7 +15,9 @@ const BasicMenu = ({ anchorEl, handleClose, open, menuItems }) => {
             >
                 {menuItems.map((item) => (
                     <MenuItem key={item.id} onClick={handleClose}>
-                        {item.label}
+                        <Link to={item.path} style={{ textDecoration: 'none', color: 'black' }}>
+                            {item.label}
+                        </Link>
                     </MenuItem>
                 ))}
             </Menu>

@@ -10,15 +10,18 @@ const AuthorizationMenu = ({ iconColor }) => {
     const authLabels = [
         {
             id: 0,
-            label: "Profile"
+            label: "Profile",
+            path: "/profile"
         },
         {
             id: 1,
-            label: "My Library"
+            label: "My Library",
+            path: "/my-library"
         },
         {
             id: 2,
-            label: "Logout"
+            label: "Login",
+            path: "/login"
         }
     ];
 
