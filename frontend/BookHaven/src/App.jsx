@@ -5,9 +5,19 @@ import Menu from './components/Containers/Menu';
 import LoginForm from './components/Containers/Forms/LoginForm';
 import "./assets/styles/index.css";
 import Header from './components/Containers/Header';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { initializeLoginFromStorage } from './reducers/loginReducer';
+import LogoutHandler from './components/Containers/LogoutHandler';
 
 const AppContent = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(initializeLoginFromStorage());
+  }
+    , [dispatch]);
 
   return (
     <div>
@@ -17,6 +27,7 @@ const AppContent = () => {
       <Routes>
         <Route path="/" element={<Menu />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/logout" element={<LogoutHandler />} />
       </Routes>
     </div>
   );

@@ -4,8 +4,10 @@ import BasicMenu from '../../Containers/BasicMenu';
 import PropTypes from 'prop-types';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import usePopover from '../../../hooks/usePopover';
+import { useSelector } from 'react-redux';
 
 const AuthorizationMenu = ({ iconColor }) => {
+    const user = useSelector(state => state.login.user);
 
     const authLabels = [
         {
@@ -18,7 +20,11 @@ const AuthorizationMenu = ({ iconColor }) => {
             label: "My Library",
             path: "/my-library"
         },
-        {
+        user ? {
+            id: 2,
+            label: "Logout",
+            path: "/logout" // Assuming you have a route to handle logout
+        } : {
             id: 2,
             label: "Login",
             path: "/login"
