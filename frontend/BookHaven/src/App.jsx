@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { initializeLoginFromStorage } from './reducers/loginReducer';
 import LogoutHandler from './components/Containers/LogoutHandler';
+import Notification from './components/UI/Notifications/Notification';
 
 const AppContent = () => {
   const location = useLocation();
@@ -21,6 +22,7 @@ const AppContent = () => {
 
   return (
     <div>
+      <Notification />
       {location.pathname !== '/login' && <Menu />}
       <div style={{ paddingTop: '100px' }}></div>
       <Header />

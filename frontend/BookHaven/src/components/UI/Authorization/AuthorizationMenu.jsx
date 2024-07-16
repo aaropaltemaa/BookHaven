@@ -23,11 +23,16 @@ const AuthorizationMenu = ({ iconColor }) => {
         user ? {
             id: 2,
             label: "Logout",
-            path: "/logout" // Assuming you have a route to handle logout
+            path: "/logout"
         } : {
             id: 2,
             label: "Login",
             path: "/login"
+        },
+        {
+            id: 3,
+            label: "Register",
+            path: "/register"
         }
     ];
 
