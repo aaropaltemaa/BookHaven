@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const baseLoginUrl = "http://localhost:3001/login";
-const baseRegisterUrl = "http://localhost:3001/register";
+const baseLoginUrl = "http://localhost:3001/api/login";
+const baseRegisterUrl = "http://localhost:3001/api/register";
 
 const login = async (credentials) => {
   console.log("Sending login request with credentials:", credentials);

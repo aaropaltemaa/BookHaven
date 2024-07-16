@@ -8,6 +8,7 @@ import StyledToolBar from '../UI/StyledToolBar';
 import AuthorizationMenu from '../UI/Authorization/AuthorizationMenu';
 
 const Header = () => {
+
     return (
         <StyledAppBar>
             <StyledToolBar>

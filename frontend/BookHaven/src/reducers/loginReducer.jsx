@@ -5,12 +5,13 @@ import { initializeUsers } from './usersReducer';
 
 export const loginUser = createAsyncThunk(
     'login/loginUser',
-    async ({ username, password, email, onSuccess }, { dispatch }) => {
-        const user = await loginService.login({ username, password, email });
+    async ({ username, password, onSuccess }, { dispatch }) => {
+        const user = await loginService.login({ username, password });
         window.localStorage.setItem('loggedFragranceappUser', JSON.stringify(user));
         bookService.setToken(user.token);
         dispatch(initializeUsers());
         if (onSuccess) onSuccess();
+        console.log('hello you', user);
         return user;
     }
 );
@@ -20,7 +21,6 @@ const loginSlice = createSlice({
     initialState: {
         username: '',
         password: '',
-        email: '',
         user: null,
     },
     reducers: {
@@ -29,9 +29,6 @@ const loginSlice = createSlice({
         },
         setPassword: (state, action) => {
             state.password = action.payload;
-        },
-        setEmail: (state, action) => {
-            state.email = action.payload;
         },
         logoutUser: (state) => {
             window.localStorage.removeItem('loggedFragranceappUser');
@@ -58,6 +55,6 @@ const loginSlice = createSlice({
     },
 });
 
-export const { setUsername, setPassword, setEmail, logoutUser, setUser, initializeLoginFromStorage } = loginSlice.actions;
+export const { setUsername, setPassword, logoutUser, setUser, initializeLoginFromStorage } = loginSlice.actions;
 
 export default loginSlice.reducer;
