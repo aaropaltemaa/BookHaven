@@ -1,95 +1,110 @@
 const bookRouter = require("express").Router();
 const Book = require("../models/book");
 const User = require("../models/user");
-const jwt = require("jsonwebtoken");
+const multer = require("multer");
 
-bookRouter.get("/", async (request, response) => {
-  const books = await Book.find({}).populate("user", { username: 1, name: 1 });
-  response.json(books);
+const storage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, "uploads/");
+  },
+  filename: (req, file, callback) => {
+    callback(null, `${Date.now()}-${file.originalname}`);
+  },
 });
 
-bookRouter.get("/:id", async (request, response) => {
-  const book = await Book.findById(request.params.id);
-  if (book) {
-    response.json(book);
-  } else {
-    response.status(404).end();
-  }
-});
+const upload = multer({ storage: storage });
 
-const getTokenFrom = (request) => {
-  const authorization = request.get("authorization");
-  if (authorization && authorization.startsWith("Bearer ")) {
-    return authorization.replace("Bearer ", "");
-  }
-  return null;
-};
-
-bookRouter.post("/", async (request, response) => {
-  const body = request.body;
-  const token = getTokenFrom(request);
-  const decodedToken = jwt.verify(token, process.env.SECRET);
-
-  if (!token || !decodedToken.id) {
-    return response.status(401).json({ error: "token missing or invalid" });
-  }
-
-  if (!body.title || !body.author) {
-    return response.status(400).json({ error: "title or author missing" });
-  }
-
-  const user = await User.findById(decodedToken.id);
-
-  const book = new Book({
-    title: body.title,
-    author: body.author,
-    description: body.description,
-    genre: body.genre,
-    pages: body.pages,
-    publisher: body.publisher,
-    read: body.read,
-    user: user._id,
-  });
-
+bookRouter.get("/", async (req, res) => {
   try {
-    const savedBook = await book.save();
-    user.books = user.books.concat(savedBook._id);
-    await user.save();
-    response.json(savedBook);
+    const books = await Book.find({});
+    res.json(books);
   } catch (error) {
-    response.status(400).json({ error: error.message });
+    res.status(500).json({ message: error.message });
   }
 });
 
-bookRouter.delete("/:id", async (request, response) => {
-  const book = await Book.findById(request.params.id);
-  if (!book) {
-    return response.status(404).json({ error: "book not found" });
+bookRouter.get("/:id", async (req, res) => {
+  try {
+    const book = await Book.findById(req.params.id);
+    if (book) {
+      res.json(book);
+    } else {
+      res.status(404).end();
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
-
-  await Book.findByIdAndDelete(request.params.id);
-  await User.updateOne({ _id: book.user }, { $pull: { books: book._id } });
-
-  response.status(204).end();
 });
 
-bookRouter.put("/:id", async (request, response) => {
-  const body = request.body;
+bookRouter.post("/", upload.single("coverImage"), async (req, res) => {
+  try {
+    const {
+      title,
+      author,
+      genre,
+      publishedDate,
+      description,
+      isbn,
+      pageCount,
+    } = req.body;
+    const coverImage = req.file ? req.file.path : "";
 
-  const book = {
-    title: body.title,
-    author: body.author,
-    description: body.description,
-    genre: body.genre,
-    pages: body.pages,
-    publisher: body.publisher,
-    read: body.read,
-  };
+    const newBook = new Book({
+      title,
+      author,
+      genre,
+      publishedDate,
+      description,
+      isbn,
+      pageCount,
+      coverImage,
+    });
 
-  const updatedBook = await Book.findByIdAndUpdate(request.params.id, book, {
-    new: true,
-  });
-  response.json(updatedBook);
+    await newBook.save();
+    res.status(201).json(newBook);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+bookRouter.delete("/:id", async (req, res) => {
+  try {
+    const book = await Book.findById(req.params.id);
+    if (!book) {
+      return res.status(404).json({ error: "book not found" });
+    }
+
+    await Book.findByIdAndDelete(req.params.id);
+    await User.updateOne({ _id: book.user }, { $pull: { books: book._id } });
+
+    res.status(204).end();
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+bookRouter.put("/:id", async (req, res) => {
+  try {
+    const body = req.body;
+
+    const book = {
+      title: body.title,
+      author: body.author,
+      genre: body.genre,
+      publishedDate: body.publishedDate,
+      description: body.description,
+      isbn: body.isbn,
+      pageCount: body.pageCount,
+      coverImage: body.coverImage,
+    };
+
+    const updatedBook = await Book.findByIdAndUpdate(req.params.id, book, {
+      new: true,
+    });
+    res.json(updatedBook);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 module.exports = bookRouter;

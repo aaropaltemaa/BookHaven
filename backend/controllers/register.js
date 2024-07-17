@@ -6,16 +6,16 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-registerRouter.post("/", async (request, response) => {
-  const { username, name, email, password } = request.body;
+registerRouter.post("/", async (req, res) => {
+  const { username, firstName, lastName, email, password } = req.body;
 
-  if (!password || !username || !email) {
-    return response.status(400).json({ error: "Missing required fields" });
+  if (!password || !username || !email || !firstName || !lastName) {
+    return res.status(400).json({ error: "Missing required fields" });
   }
 
   const existingUser = await User.findOne({ username });
   if (existingUser) {
-    return response.status(400).json({ error: "Username already exists" });
+    return res.status(400).json({ error: "Username already exists" });
   }
 
   const saltRounds = 10;
@@ -23,7 +23,8 @@ registerRouter.post("/", async (request, response) => {
 
   const user = new User({
     username,
-    name,
+    firstName,
+    lastName,
     email,
     passwordHash,
   });
@@ -39,7 +40,7 @@ registerRouter.post("/", async (request, response) => {
     expiresIn: 60 * 60,
   });
 
-  response
+  res
     .status(201)
     .json({ token, username: savedUser.username, id: savedUser._id });
 });

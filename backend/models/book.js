@@ -1,25 +1,37 @@
 const mongoose = require("mongoose");
 
 const bookSchema = new mongoose.Schema({
-  title: String,
-  author: String,
-  description: String,
-  genre: String,
-  pages: Number,
-  publisher: String,
-  read: Boolean,
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+  title: {
+    type: String,
     required: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
+  author: {
+    type: String,
+    required: true,
   },
-  updatedAt: {
+  genre: {
+    type: String,
+    required: true,
+  },
+  publishedDate: {
     type: Date,
-    default: Date.now,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  isbn: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  pageCount: {
+    type: Number,
+    required: true,
+  },
+  coverImage: {
+    type: String,
   },
 });
 
