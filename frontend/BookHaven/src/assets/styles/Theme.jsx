@@ -15,9 +15,10 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     textTransform: 'none',
-                    borderRadius: "20px",
+                    borderRadius: "10px",
                     fontSize: "1.3rem",
                     fontWeight: 700,
+                    width: "100%",
                 },
                 contained: {
                     "&:hover": {

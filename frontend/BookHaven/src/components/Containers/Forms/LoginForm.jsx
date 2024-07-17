@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, Button, Typography, Container } from '@mui/material';
 import { unwrapResult } from '@reduxjs/toolkit';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { loginUser, setPassword, setUsername } from "../../../reducers/loginReducer";
 
@@ -36,8 +36,8 @@ const LoginForm = () => {
     };
 
     return (
-        <Container maxWidth="sm" style={{ marginBottom: "400px", marginLeft: "600px" }}>
-            <Typography variant="h4" style={{ marginBottom: '16px', color: "black" }}>Login</Typography>
+        <Container maxWidth="sm" style={{ marginBottom: "150px", marginLeft: "600px" }}>
+            <Typography variant="h4" style={{ marginBottom: '16px', color: "black" }}>Sign in to your account to continue</Typography>
             <form onSubmit={handleLogin}>
                 <div style={{ marginBottom: '16px' }}>
                     <TextField
@@ -62,9 +62,15 @@ const LoginForm = () => {
                             'data-testid': 'password-input',
                             "autoComplete": "off"
                         }}
+                        sx={{
+                            '& .MuiInputBase-input': {
+                                backgroundColor: '#FFFFFF',
+                            },
+                        }}
                     />
                 </div>
                 <Button type="submit" variant="contained" color="primary" style={{ marginBottom: '16px' }}>Login</Button>
+                <Typography variant="body1" style={{ marginBottom: '16px', marginLeft: "150px", color: "black" }}>Don&apos;t have an account yet? <Link to="/register">Sign up</Link></Typography>
             </form>
         </Container>
     );

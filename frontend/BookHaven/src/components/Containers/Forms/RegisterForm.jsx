@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { registerUser } from '../../../reducers/registerReducer';
@@ -33,7 +33,7 @@ const RegisterForm = () => {
     };
 
     return (
-        <Container maxWidth="sm" style={{ marginBottom: "400px", marginLeft: "600px" }}>
+        <Container maxWidth="sm" style={{ marginBottom: "150px", marginLeft: "600px" }}>
             <Typography variant="h4" style={{ marginBottom: '16px', color: "black" }}>Join Us. Where every book has its day. </Typography>
             <form onSubmit={handleRegister}>
                 <div style={{ marginBottom: '16px' }}>
@@ -58,7 +58,7 @@ const RegisterForm = () => {
                         required
                         inputProps={{
                             'data-testid': 'register-username',
-                            'autoComplete': 'username', // Add this line
+                            'autoComplete': 'username',
                         }}
                     />
                     <TextField
@@ -70,7 +70,7 @@ const RegisterForm = () => {
                         required
                         inputProps={{
                             'data-testid': 'register-password',
-                            'autoComplete': 'new-password', // Add this line
+                            'autoComplete': 'new-password',
                         }}
                     />
                     <TextField
@@ -82,11 +82,13 @@ const RegisterForm = () => {
                         fullWidth
                         inputProps={{
                             'data-testid': 'register-confirm-password',
-                            'autoComplete': 'new-password', // Add this line
+                            'autoComplete': 'new-password',
                         }}
                     />
                 </div>
                 <Button type="submit" variant="contained" color="primary">Sign Up</Button>
+                <Typography variant="body1" style={{ marginTop: "10px", marginLeft: "150px", color: "black" }}>Already have an account? <Link to="/login">Log in</Link></Typography>
+
             </form>
         </Container>
     );

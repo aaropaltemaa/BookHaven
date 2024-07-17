@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './assets/styles/Theme';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import Menu from './components/Containers/Menu';
 import LoginForm from './components/Containers/Forms/LoginForm';
 import "./assets/styles/index.css";
@@ -15,14 +15,13 @@ import RegisterForm from './components/Containers/Forms/RegisterForm';
 const AppContent = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.login.user); // Assuming your login state is stored under `login`
+  const user = useSelector((state) => state.login.user);
 
   useEffect(() => {
     dispatch(initializeLoginFromStorage());
   }, [dispatch]);
 
-  // If user is not logged in, render LoginForm directly
-  if (!user) {
+  if (!user && location.pathname !== '/register') {
     return <LoginForm />;
   }
 
@@ -31,12 +30,12 @@ const AppContent = () => {
       <Notification />
       {location.pathname !== '/login' && location.pathname !== '/register' && <Menu />}
       <div style={{ paddingTop: '100px' }}></div>
-      <Header />
+      {location.pathname !== '/register' && <Header /> && location.pathname !== '/login' && <Header />}
       <Routes>
-        <Route path="/" element={<Menu />} />
+        <Route path="/" element={user ? <Menu /> : <Navigate to="/login" />} />
         <Route path="/logout" element={<LogoutHandler />} />
         <Route path="/register" element={<RegisterForm />} />
-        {/* Add other routes here */}
+        <Route path="/login" element={<LoginForm />} />
       </Routes>
     </div>
   );
