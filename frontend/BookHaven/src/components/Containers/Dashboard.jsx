@@ -1,6 +1,27 @@
-import { Divider, Grid, Container, Typography, CardContent, CardHeader, CardActions, Box } from '@mui/material';
+import { Divider, Grid, Container, Typography, CardContent, CardHeader, Box } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import StyledCard from '../UI/StyledCard';
+import { Chart as ChartJS } from 'chart.js/auto';
+import { Bar, Doughnut, Line } from 'react-chartjs-2';
+
+const BarChart = () => {
+    const data = {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [
+            {
+                label: 'Books Read',
+                data: [12, 19, 3, 5, 2, 3, 9, 10, 15, 20, 25, 30],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+            },
+        ],
+    };
+
+    return (
+        <Bar data={data} />
+    );
+}
 
 const BooksInLibraryCard = () => {
     return (
@@ -50,6 +71,7 @@ const Dashboard = () => {
                         <Grid item xs={6}>
                             <ReadingStreakCard />
                         </Grid>
+                        <BarChart />
                     </Grid>
                 </Grid>
             </Grid>

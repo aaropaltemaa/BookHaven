@@ -18,7 +18,7 @@ const AuthorizationMenu = ({ iconColor }) => {
         {
             id: 1,
             label: "My Library",
-            path: "/my-library"
+            path: "/library"
         },
         user ? {
             id: 2,
