@@ -14,7 +14,6 @@ const RegisterForm = () => {
     const [lastName, setLastName] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
 
     useEffect(() => {
         if (justRegistered) {
@@ -94,18 +93,6 @@ const RegisterForm = () => {
                         required
                         inputProps={{
                             'data-testid': 'register-password',
-                            'autoComplete': 'new-password',
-                        }}
-                    />
-                    <TextField
-                        type="password"
-                        label="Confirm Password"
-                        helperText="Do not share your password with anyone."
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        fullWidth
-                        inputProps={{
-                            'data-testid': 'register-confirm-password',
                             'autoComplete': 'new-password',
                         }}
                     />

@@ -1,10 +1,8 @@
-import { Divider, Grid, Container, Typography, CardContent, CardHeader, Box } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { Divider, Grid, Typography, CardContent, CardHeader, Box } from '@mui/material';
+import { useSelector } from 'react-redux';
 import StyledCard from '../UI/StyledCard';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Bar, Doughnut } from 'react-chartjs-2';
-
-// Hardcoded for testing // replace with actual data from the database later
 
 const ReadingProgressChart = () => {
     const data = {
@@ -22,16 +20,25 @@ const ReadingProgressChart = () => {
     };
 
     const options = {
-        maintainAspectRatio: false, // Allows chart to adjust to container size
+        maintainAspectRatio: false,
         scales: {
             y: {
                 beginAtZero: true,
             },
         },
+        responsive: true,
+        layout: {
+            padding: {
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+            }
+        },
     };
 
     return (
-        <div style={{ width: '100%', height: '400px' }}>
+        <div style={{ width: '100%', height: '100%' }}>
             <Bar data={data} options={options} />
         </div>
     );
@@ -45,13 +52,13 @@ const GenreDistributionChart = () => {
                 label: 'Genres',
                 data: [30, 20, 15, 25, 10],
                 backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                    'rgb(255, 206, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(153, 102, 255)'
+                    'rgba(0, 0, 255, 0.2)',
+                    'rgba(0, 0, 255, 0.4)',
+                    'rgba(0, 0, 255, 0.6)',
+                    'rgba(0, 0, 255, 0.8)',
+                    'rgba(128, 128, 128, 0.2)'
                 ],
-                hoverOffset: 100,
+                hoverOffset: 50,
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1,
                 borderRadius: 15,
@@ -60,11 +67,11 @@ const GenreDistributionChart = () => {
     };
 
     const options = {
-        maintainAspectRatio: false, // Allows chart to adjust to container size
+        maintainAspectRatio: false,
     };
 
     return (
-        <div style={{ width: '100%', height: '400px' }}>
+        <div style={{ width: '100%', height: '100%' }}>
             <Doughnut data={data} options={options} />
         </div>
     );
@@ -73,10 +80,8 @@ const GenreDistributionChart = () => {
 const BooksInLibraryCard = () => {
     return (
         <StyledCard>
-            <div style={{ marginBottom: "-10px" }}>
-                <CardHeader title="Total Books" />
-            </div>
-            <CardContent >
+            <CardHeader title="Total Books" />
+            <CardContent>
                 <Typography variant="h4">10</Typography>
                 <Typography marginTop="15px" variant="body1" color="textSecondary">You have 10 books in your library.</Typography>
             </CardContent>
@@ -87,12 +92,32 @@ const BooksInLibraryCard = () => {
 const ReadingStreakCard = () => {
     return (
         <StyledCard>
-            <div style={{ marginBottom: "-10px" }}>
-                <CardHeader title="Reading Streak" />
-            </div>
-            <CardContent >
+            <CardHeader title="Reading Streak" />
+            <CardContent>
                 <Typography variant="h4">5 days</Typography>
-                <Typography marginTop="15px" variant="body1" color="textSecondary">You've been reading for 5 days straight.</Typography>
+                <Typography marginTop="15px" variant="body1" color="textSecondary">You&apos;ve been reading for 5 days straight.</Typography>
+            </CardContent>
+        </StyledCard>
+    );
+}
+
+const ReadingProgressCard = () => {
+    return (
+        <StyledCard>
+            <CardHeader title="Reading Progress" />
+            <CardContent sx={{ height: 250 }}>
+                <ReadingProgressChart />
+            </CardContent>
+        </StyledCard>
+    );
+}
+
+const GenreDistributionCard = () => {
+    return (
+        <StyledCard>
+            <CardHeader title="Genre Distribution" />
+            <CardContent sx={{ height: 250 }}>
+                <GenreDistributionChart />
             </CardContent>
         </StyledCard>
     );
@@ -100,34 +125,31 @@ const ReadingStreakCard = () => {
 
 const Dashboard = () => {
     const user = useSelector((state) => state.login.user);
-    const dispatch = useDispatch();
 
     return (
-        <Container sx={{ maxWidth: "100%", overflowX: "hidden", marginLeft: "300px", marginBottom: "50px" }}>
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <Typography variant="h2" color="primary" align="left" gutterBottom>Dashboard</Typography>
-                    <Typography variant="h5" color="primary" marginBottom="30px" align="left" gutterBottom>Welcome back, {user.firstName}! Ready to dive into another adventure? 📚</Typography>
-                    <Box sx={{ marginRight: '-630px' }}> {/* Adjust the marginRight value as needed */}
-                        <Divider />
-                    </Box>
-                    <Grid container spacing={2}>
-                        <Grid item xs={6}>
-                            <BooksInLibraryCard />
+        <Box sx={{ display: 'flex', overflowX: 'auto', marginTop: "-120px" }}>
+            <Box sx={{ width: 'calc(100% - 260px)', marginLeft: '200px', padding: 16 }}>
+                <Typography variant="h2" color="primary" align="left" gutterBottom>Dashboard</Typography>
+                <Typography variant="h5" color="primary" marginBottom="30px" align="left" gutterBottom>Welcome back, {user.firstName}! Ready to dive into another adventure? 📚</Typography>
+                <Divider sx={{ marginBottom: "20px" }} />
+                <Grid container spacing={6}>
+                    <Grid item xs={12} sm={6} md={3.3}>
+                        <BooksInLibraryCard />
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={3.3}>
+                        <ReadingStreakCard />
+                    </Grid>
+                    <Grid container item xs={12} spacing={6} marginTop="-110px">
+                        <Grid item xs={12} md={8}>
+                            <ReadingProgressCard />
                         </Grid>
-                        <Grid item xs={6}>
-                            <ReadingStreakCard />
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <ReadingProgressChart />
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <GenreDistributionChart />
+                        <Grid item xs={12} md={4}>
+                            <GenreDistributionCard />
                         </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
-        </Container>
+            </Box>
+        </Box>
     );
 };
 
