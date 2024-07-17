@@ -1,4 +1,4 @@
-import { Divider, Grid, Container, Typography, CardContent, CardHeader, CardActions } from '@mui/material';
+import { Divider, Grid, Container, Typography, CardContent, CardHeader, CardActions, Box } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import StyledCard from '../UI/StyledCard';
 
@@ -40,7 +40,9 @@ const Dashboard = () => {
                 <Grid item xs={12} sx={{ marginBottom: "600px" }}>
                     <Typography variant="h2" color="primary" align="left" gutterBottom>Dashboard</Typography>
                     <Typography variant="h5" color="primary" marginBottom="30px" align="left" gutterBottom>Welcome back, {user.firstName}! Ready to dive into another adventure? 📚</Typography>
-                    <Divider />
+                    <Box sx={{ marginRight: '-630px' }}> {/* Adjust the marginRight value as needed */}
+                        <Divider />
+                    </Box>
                     <Grid container spacing={1}>
                         <Grid item xs={6}>
                             <BooksInLibraryCard />
