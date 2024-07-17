@@ -10,6 +10,8 @@ const RegisterForm = () => {
     const navigate = useNavigate();
     const [justRegistered, setJustRegistered] = useState(false);
     const [username, setUsername] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -24,7 +26,7 @@ const RegisterForm = () => {
     const handleRegister = async (event) => {
         event.preventDefault();
         try {
-            const resultAction = await dispatch(registerUser({ username, password, email }));
+            const resultAction = await dispatch(registerUser({ username, firstName, lastName, password, email }));
             unwrapResult(resultAction);
             setJustRegistered(true);
         } catch (error) {
@@ -47,6 +49,28 @@ const RegisterForm = () => {
                         required
                         inputProps={{
                             'data-testid': 'register-email-input',
+                        }}
+                    />
+                    <TextField
+                        type="text"
+                        label="First Name"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        fullWidth
+                        required
+                        inputProps={{
+                            'data-testid': 'register-firstname',
+                        }}
+                    />
+                    <TextField
+                        type="text"
+                        label="Last Name"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        fullWidth
+                        required
+                        inputProps={{
+                            'data-testid': 'register-lastname',
                         }}
                     />
                     <TextField

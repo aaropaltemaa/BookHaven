@@ -4,11 +4,11 @@ import { loginUser } from './loginReducer';
 
 export const registerUser = createAsyncThunk(
     'register/registerUser',
-    async ({ username, password, email }, { dispatch }) => {
+    async ({ username, password, firstName, lastName, email }, { dispatch }) => {
         try {
-            const user = await loginService.register({ username, password, email });
+            const user = await loginService.register({ username, password, firstName, lastName, email });
             console.log('User registered:', user);
-            window.localStorage.setItem('loggedFragranceappUser', JSON.stringify(user));
+            window.localStorage.setItem('loggedBookHavenUser', JSON.stringify(user));
             dispatch(loginUser({ username, password }));
             return user;
         } catch (error) {

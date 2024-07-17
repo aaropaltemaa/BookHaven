@@ -7,11 +7,11 @@ export const loginUser = createAsyncThunk(
     'login/loginUser',
     async ({ username, password, onSuccess }, { dispatch }) => {
         const user = await loginService.login({ username, password });
-        window.localStorage.setItem('loggedFragranceappUser', JSON.stringify(user));
+        window.localStorage.setItem('loggedBookHavenUser', JSON.stringify(user));
         bookService.setToken(user.token);
         dispatch(initializeUsers());
+        dispatch(setUser(user));
         if (onSuccess) onSuccess();
-        console.log('hello you', user);
         return user;
     }
 );
@@ -22,6 +22,8 @@ const loginSlice = createSlice({
         username: '',
         password: '',
         user: null,
+        firstName: '',
+        lastName: '',
     },
     reducers: {
         setUsername: (state, action) => {
@@ -31,24 +33,31 @@ const loginSlice = createSlice({
             state.password = action.payload;
         },
         logoutUser: (state) => {
-            window.localStorage.removeItem('loggedFragranceappUser');
+            window.localStorage.removeItem('loggedBookHavenUser');
             state.user = null;
         },
         setUser: (state, action) => {
             state.user = action.payload;
+            state.firstName = action.payload.firstName;
+            state.lastName = action.payload.lastName;
         },
         initializeLoginFromStorage: (state) => {
-            const loggedUserJSON = window.localStorage.getItem('loggedFragranceappUser');
+            const loggedUserJSON = window.localStorage.getItem('loggedBookHavenUser');
             if (loggedUserJSON) {
                 const user = JSON.parse(loggedUserJSON);
                 state.user = user;
+                state.firstName = user.firstName;
+                state.lastName = user.lastName;
                 bookService.setToken(user.token);
             }
         },
     },
     extraReducers: (builder) => {
         builder.addCase(loginUser.fulfilled, (state, action) => {
-            state.user = action.payload;
+            const user = action.payload;
+            state.user = user;
+            state.firstName = user.firstName;
+            state.lastName = user.lastName;
             state.username = '';
             state.password = '';
         });
