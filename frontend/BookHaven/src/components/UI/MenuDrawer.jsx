@@ -8,6 +8,7 @@ import DrawerHelper from '../Containers/DrawerHelper';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
+import { Link } from 'react-router-dom';
 
 const Display = ({ menuItems, navigate }) => {
     const drawerWidth = 240;
@@ -23,7 +24,9 @@ const Display = ({ menuItems, navigate }) => {
             }}
         >
             <div style={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%', color: "#ecf0f1" }}>
-                <LocalLibraryIcon style={{ fontSize: '60px', marginLeft: "85px", marginTop: "30px", color: "#ecf0f1" }} />
+                <Link to="/" >
+                    <LocalLibraryIcon style={{ fontSize: '60px', marginLeft: "85px", marginTop: "30px", color: "#ecf0f1" }} />
+                </Link>
                 <Typography variant="h4" style={{ marginTop: '30px', marginLeft: "60px", color: "#ecf0f1" }}>
                     BookHaven
                 </Typography>

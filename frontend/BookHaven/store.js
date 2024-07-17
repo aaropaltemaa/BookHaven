@@ -4,6 +4,7 @@ import bookService from "./src/services/books";
 import loginReducer from "./src/reducers/loginReducer";
 import usersReducer from "./src/reducers/usersReducer";
 import notificationReducer from "./src/reducers/notificationReducer";
+import registerReducer from "./src/reducers/registerReducer";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     login: loginReducer,
     users: usersReducer,
     notification: notificationReducer,
+    register: registerReducer,
   },
 });
 

@@ -11,6 +11,7 @@ import { initializeLoginFromStorage } from './reducers/loginReducer';
 import LogoutHandler from './components/Containers/LogoutHandler';
 import Notification from './components/UI/Notifications/Notification';
 import RegisterForm from './components/Containers/Forms/RegisterForm';
+import Dashboard from './components/Containers/Dashboard';
 
 const AppContent = () => {
   const location = useLocation();
@@ -32,7 +33,7 @@ const AppContent = () => {
       <div style={{ paddingTop: '100px' }}></div>
       {location.pathname !== '/register' && <Header /> && location.pathname !== '/login' && <Header />}
       <Routes>
-        <Route path="/" element={user ? <Menu /> : <Navigate to="/login" />} />
+        <Route path="/" element={user ? <Dashboard /> : <Navigate to="/login" />} />
         <Route path="/logout" element={<LogoutHandler />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/login" element={<LoginForm />} />
