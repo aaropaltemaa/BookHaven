@@ -37,7 +37,7 @@ const LoginForm = () => {
 
     return (
         <Container maxWidth="sm" style={{ marginBottom: "150px", marginLeft: "600px" }}>
-            <Typography variant="h4" style={{ marginBottom: '16px', color: "black" }}>Sign in to your account to continue</Typography>
+            <Typography variant="h4" style={{ marginBottom: '16px', color: "black" }}>Log in</Typography>
             <form onSubmit={handleLogin}>
                 <div style={{ marginBottom: '16px' }}>
                     <TextField

@@ -12,6 +12,7 @@ import LogoutHandler from './components/Containers/LogoutHandler';
 import Notification from './components/UI/Notifications/Notification';
 import RegisterForm from './components/Containers/Forms/RegisterForm';
 import Dashboard from './components/Containers/Dashboard';
+import Books from './components/Containers/Discover/Books';
 
 const AppContent = () => {
   const location = useLocation();
@@ -37,6 +38,7 @@ const AppContent = () => {
         <Route path="/logout" element={<LogoutHandler />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/discover" element={<Books />} />
       </Routes>
     </div>
   );

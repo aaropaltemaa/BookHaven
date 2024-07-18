@@ -6,7 +6,7 @@ const StyledCard = styled(Card)({
     height: "auto",
     padding: '1rem',
     margin: '1.5rem 0',
-    borderRadius: '30px',
+    borderRadius: '20px',
     boxShadow: '0 0 10px rgba(0,0,0,0.1)',
 });
 

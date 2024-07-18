@@ -133,10 +133,10 @@ const Dashboard = () => {
                 <Typography variant="h5" color="primary" marginBottom="30px" align="left" gutterBottom>Welcome back, {user.firstName}! Ready to dive into another adventure? 📚</Typography>
                 <Divider sx={{ marginBottom: "20px" }} />
                 <Grid container spacing={6}>
-                    <Grid item xs={12} sm={6} md={3.3}>
+                    <Grid item xs={12} sm={6} md={3}>
                         <BooksInLibraryCard />
                     </Grid>
-                    <Grid item xs={12} sm={6} md={3.3}>
+                    <Grid item xs={12} sm={6} md={3}>
                         <ReadingStreakCard />
                     </Grid>
                     <Grid container item xs={12} spacing={6} marginTop="-110px">
