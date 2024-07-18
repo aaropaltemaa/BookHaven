@@ -29,18 +29,18 @@ const theme = createTheme({
         },
     },
     typography: {
-        fontFamily: 'Poppins',
+        fontFamily: "Georgia, serif",
         fontSize: 14,
         h1: {
             fontSize: '3.5rem',
             fontWeight: 700,
         },
         h2: {
-            fontSize: '2rem',
+            fontSize: '1.8rem',
             fontWeight: 600,
         },
         h3: {
-            fontSize: '1.75rem',
+            fontSize: '1.7rem',
             fontWeight: 400,
         },
         h4: {

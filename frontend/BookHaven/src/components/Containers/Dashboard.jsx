@@ -1,4 +1,4 @@
-import { Divider, Grid, Typography, CardContent, CardHeader, Box } from '@mui/material';
+import { Grid, Typography, CardContent, CardHeader, Divider, Box } from '@mui/material';
 import { useSelector } from 'react-redux';
 import StyledCard from '../UI/StyledCard';
 import { Chart as ChartJS } from 'chart.js/auto';
@@ -123,34 +123,40 @@ const GenreDistributionCard = () => {
     );
 }
 
-const Dashboard = () => {
+const Text = () => {
     const user = useSelector((state) => state.login.user);
-
     return (
-        <Box sx={{ display: 'flex', overflowX: 'auto', marginTop: "-120px" }}>
-            <Box sx={{ width: 'calc(100% - 260px)', marginLeft: '200px', padding: 16 }}>
-                <Typography variant="h2" color="primary" align="left" gutterBottom>Dashboard</Typography>
-                <Typography variant="h5" color="primary" marginBottom="30px" align="left" gutterBottom>Welcome back, {user.firstName}! Ready to dive into another adventure? 📚</Typography>
-                <Divider sx={{ marginBottom: "20px" }} />
-                <Grid container spacing={6}>
-                    <Grid item xs={12} sm={6} md={3}>
-                        <BooksInLibraryCard />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={3}>
-                        <ReadingStreakCard />
-                    </Grid>
-                    <Grid container item xs={12} spacing={6} marginTop="-110px">
-                        <Grid item xs={12} md={8}>
-                            <ReadingProgressCard />
-                        </Grid>
-                        <Grid item xs={12} md={4}>
-                            <GenreDistributionCard />
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Box>
+        <Box sx={{ marginTop: "40px", display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginLeft: '320px' }}>
+            <Typography variant="h2" color="primary" gutterBottom>
+                Dashboard
+            </Typography>
+            <Typography variant="h6" color="primary" gutterBottom>
+                Welcome back, {user.firstName}! Here&apos;s a summary of your reading activity. 📚
+            </Typography>
+            <Divider sx={{ marginTop: "25px", width: '82%' }} />
         </Box>
     );
-};
+}
+const Dashboard = () => {
+    return (
+        <>
+            <Text />
+            <Grid container spacing={7} padding={40} sx={{ marginTop: "-350px" }}>
+                <Grid item xs={6}>
+                    <BooksInLibraryCard />
+                </Grid>
+                <Grid item xs={6}>
+                    <ReadingStreakCard />
+                </Grid>
+                <Grid item xs={6} sx={{ marginTop: "-80px" }}>
+                    <ReadingProgressCard />
+                </Grid>
+                <Grid item xs={6} sx={{ marginTop: "-80px" }}>
+                    <GenreDistributionCard />
+                </Grid>
+            </Grid>
+        </>
+    );
+}
 
 export default Dashboard;

@@ -19,7 +19,10 @@ const Display = ({ menuItems, navigate }) => {
                 sx: {
                     height: '100%',
                     width: drawerWidth,
-                    backgroundColor: '#1A2E47'
+                    backgroundColor: '#1A2E47',
+                    root: {
+                        display: 'flex',
+                    }
                 },
             }}
         >
