@@ -33,8 +33,6 @@ app.use("/api/books", booksRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/register", registerRouter);
 
-app.use("/uploads", express.static("uploads"));
-
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 

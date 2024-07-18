@@ -1,18 +1,6 @@
 const bookRouter = require("express").Router();
 const Book = require("../models/book");
 const User = require("../models/user");
-const multer = require("multer");
-
-const storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    callback(null, "uploads/");
-  },
-  filename: (req, file, callback) => {
-    callback(null, `${Date.now()}-${file.originalname}`);
-  },
-});
-
-const upload = multer({ storage: storage });
 
 bookRouter.get("/", async (req, res) => {
   try {
@@ -36,7 +24,7 @@ bookRouter.get("/:id", async (req, res) => {
   }
 });
 
-bookRouter.post("/", upload.single("coverImage"), async (req, res) => {
+bookRouter.post("/", async (req, res) => {
   try {
     const {
       title,
@@ -46,8 +34,8 @@ bookRouter.post("/", upload.single("coverImage"), async (req, res) => {
       description,
       isbn,
       pageCount,
+      coverImage,
     } = req.body;
-    const coverImage = req.file ? req.file.path : "";
 
     const newBook = new Book({
       title,
