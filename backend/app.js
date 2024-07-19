@@ -9,6 +9,7 @@ const usersRouter = require("./controllers/users");
 const booksRouter = require("./controllers/books");
 const loginRouter = require("./controllers/login");
 const registerRouter = require("./controllers/register");
+const libraryRouter = require("./controllers/library");
 
 mongoose.set("strictQuery", false);
 
@@ -32,6 +33,7 @@ app.use("/api/users", usersRouter);
 app.use("/api/books", booksRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/register", registerRouter);
+app.use("/api/library", libraryRouter);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
