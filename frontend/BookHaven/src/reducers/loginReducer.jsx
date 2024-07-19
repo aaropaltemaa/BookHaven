@@ -24,6 +24,7 @@ const loginSlice = createSlice({
         user: null,
         firstName: '',
         lastName: '',
+        userId: null,
     },
     reducers: {
         setUsername: (state, action) => {
@@ -35,19 +36,26 @@ const loginSlice = createSlice({
         logoutUser: (state) => {
             window.localStorage.removeItem('loggedBookHavenUser');
             state.user = null;
+            state.firstName = '';
+            state.lastName = '';
+            state.userId = null;
         },
         setUser: (state, action) => {
+            console.log('Setting user:', action.payload); // Debug log
             state.user = action.payload;
             state.firstName = action.payload.firstName;
             state.lastName = action.payload.lastName;
+            state.userId = action.payload.id;
         },
         initializeLoginFromStorage: (state) => {
             const loggedUserJSON = window.localStorage.getItem('loggedBookHavenUser');
             if (loggedUserJSON) {
                 const user = JSON.parse(loggedUserJSON);
+                console.log('Initializing user from storage:', user); // Debug log
                 state.user = user;
                 state.firstName = user.firstName;
                 state.lastName = user.lastName;
+                state.userId = user.id;
                 bookService.setToken(user.token);
             }
         },
@@ -55,11 +63,13 @@ const loginSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(loginUser.fulfilled, (state, action) => {
             const user = action.payload;
+            console.log('User logged in:', user); // Debug log
             state.user = user;
             state.firstName = user.firstName;
             state.lastName = user.lastName;
             state.username = '';
             state.password = '';
+            state.userId = user.id;
         });
     },
 });

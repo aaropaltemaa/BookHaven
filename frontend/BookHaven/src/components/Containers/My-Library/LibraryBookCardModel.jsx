@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const BookCardModel = ({ bookId }) => {
-    const book = useSelector((state) => state.books.find((book) => book.id === bookId));
+const LibraryBookCardModel = ({ bookId }) => {
+    const book = useSelector((state) => state.library.find((book) => book.id === bookId));
 
     if (!book) {
-
         return null;
     }
 
@@ -20,7 +19,7 @@ const BookCardModel = ({ bookId }) => {
     });
 
     return (
-        <Grid container spacing={3} alignItems="center" style={{ marginLeft: "-90px" }}>
+        <Grid container spacing={3} alignItems="center" style={{ marginLeft: 300, marginTop: 20 }}>
             <Grid item xs={3}>
                 <Link to={`/books/${book.id}`} style={{ textDecoration: 'none' }}>
                     <img src={book.coverImage} alt={book.title} style={{ width: '35%' }} />
@@ -49,8 +48,8 @@ const BookCardModel = ({ bookId }) => {
     );
 };
 
-BookCardModel.propTypes = {
+LibraryBookCardModel.propTypes = {
     bookId: PropTypes.string.isRequired,
 }
 
-export default BookCardModel;
+export default LibraryBookCardModel;

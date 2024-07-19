@@ -13,6 +13,7 @@ import Notification from './components/UI/Notifications/Notification';
 import RegisterForm from './components/Containers/Forms/RegisterForm';
 import Dashboard from './components/Containers/Dashboard';
 import Books from './components/Containers/Discover/Books';
+import Library from './components/Containers/My-Library/Library';
 
 const AppContent = () => {
   const location = useLocation();
@@ -39,6 +40,7 @@ const AppContent = () => {
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/discover" element={<Books />} />
+        <Route path="/library" element={<Library />} />
       </Routes>
     </div>
   );
