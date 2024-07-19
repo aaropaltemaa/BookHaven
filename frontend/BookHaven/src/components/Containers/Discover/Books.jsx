@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { initializeBooks } from '../../../reducers/bookReducer';
 import BookCardModel from './BookCardModel';
+import { SearchBar } from './FilterBooks';
 
 const Text = () => {
     return (
@@ -18,7 +19,7 @@ const Text = () => {
     );
 }
 
-const BookList = () => {
+const FetchBooks = () => {
     const dispatch = useDispatch();
     const books = useSelector((state) => state.books)
 
@@ -27,7 +28,7 @@ const BookList = () => {
     }, [dispatch]);
 
     return (
-        <div style={{ marginLeft: 400, marginTop: 50 }}>
+        <div style={{ marginLeft: 400, marginTop: 80 }}>
             {books.map(b => (
                 <div key={b.id} style={{ marginBottom: '50px' }}>
                     <BookCardModel bookId={b.id} />
@@ -42,7 +43,8 @@ const Books = () => {
     return (
         <div>
             <Text />
-            <BookList />
+            <SearchBar />
+            <FetchBooks />
         </div>
     );
 }

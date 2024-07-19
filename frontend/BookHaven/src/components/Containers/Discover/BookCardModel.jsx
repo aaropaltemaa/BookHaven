@@ -22,7 +22,7 @@ const BookCardModel = ({ bookId }) => {
         <Grid container spacing={3} alignItems="center" style={{ marginLeft: "-90px" }}>
             <Grid item xs={3}>
                 <Link to={`/books/${book.id}`} style={{ textDecoration: 'none' }}>
-                    <img src={book.coverImage} alt={book.title} style={{ width: '40%' }} />
+                    <img src={book.coverImage} alt={book.title} style={{ width: '35%' }} />
                 </Link>
             </Grid>
             <Grid item xs={9}>

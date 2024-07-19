@@ -36,19 +36,19 @@ const theme = createTheme({
             fontWeight: 700,
         },
         h2: {
-            fontSize: '1.8rem',
+            fontSize: '1.6rem',
             fontWeight: 600,
         },
         h3: {
-            fontSize: '1.7rem',
+            fontSize: '1.5rem',
             fontWeight: 400,
         },
         h4: {
-            fontSize: '1.5rem',
+            fontSize: '1.4rem',
             fontWeight: 500,
         },
         h5: {
-            fontSize: '1.25rem',
+            fontSize: '1.3rem',
             fontWeight: 500,
         },
         h6: {
