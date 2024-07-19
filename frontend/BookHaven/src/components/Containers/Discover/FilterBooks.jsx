@@ -61,7 +61,7 @@ export const SearchBar = () => {
     );
 };
 
-export const FilterByCriteria = ({ onGenreChange }) => {
+export const FilterByGenre = ({ onGenreChange }) => {
     const [genre, setGenre] = useState('');
 
     const handleGenreChange = (event) => {
@@ -86,13 +86,53 @@ export const FilterByCriteria = ({ onGenreChange }) => {
                     <MenuItem value="Fantasy">Fantasy</MenuItem>
                     <MenuItem value="Sci-Fi">Sci-Fi</MenuItem>
                     <MenuItem value="Mystery">Mystery</MenuItem>
-                    {/* Add more genres as needed */}
+                    <MenuItem value="Romance">Romance</MenuItem>
+                    <MenuItem value="Dystopian">Dystopian</MenuItem>
+                    <MenuItem value="Tragedy">Tragedy</MenuItem>
+                    <MenuItem value="Adventure">Adventure</MenuItem>
                 </Select>
             </FormControl>
         </Box>
     );
 }
 
-FilterByCriteria.propTypes = {
+FilterByGenre.propTypes = {
     onGenreChange: PropTypes.func.isRequired,
-}
+};
+
+export const FilterByPageCount = ({ onPageCountChange }) => {
+    const [pageRange, setPageRange] = useState('');
+
+    const handlePageRangeChange = (event) => {
+        setPageRange(event.target.value);
+        onPageCountChange(event.target.value); // Notify the parent component of the page range change
+    };
+
+    return (
+        <Box sx={{ minWidth: 120, ml: 200, mt: 3 }}>
+            <FormControl fullWidth>
+                <InputLabel id="page-range-select-label">Page Range</InputLabel>
+                <Select
+                    labelId="page-range-select-label"
+                    id="page-range-select"
+                    value={pageRange}
+                    label="Page Range"
+                    onChange={handlePageRangeChange}
+                >
+                    <MenuItem value="">
+                        <em>None</em>
+                    </MenuItem>
+                    <MenuItem value="100-200">100-200 pages</MenuItem>
+                    <MenuItem value="200-300">200-300 pages</MenuItem>
+                    <MenuItem value="300-400">300-400 pages</MenuItem>
+                    <MenuItem value="400-500">400-500 pages</MenuItem>
+                    <MenuItem value="500+">500+ pages</MenuItem>
+                </Select>
+            </FormControl>
+        </Box>
+    );
+};
+
+FilterByPageCount.propTypes = {
+    onPageCountChange: PropTypes.func.isRequired,
+};

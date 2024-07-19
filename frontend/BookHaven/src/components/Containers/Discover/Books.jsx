@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { initializeBooks } from '../../../reducers/bookReducer';
 import BookCardModel from './BookCardModel';
-import { SearchBar, FilterByCriteria } from './FilterBooks';
-
+import { SearchBar, FilterByGenre, FilterByPageCount } from './FilterBooks';
 
 const Text = () => {
     return (
@@ -24,6 +23,7 @@ const Books = () => {
     const dispatch = useDispatch();
     const allBooks = useSelector((state) => state.books);
     const [genre, setGenre] = useState('');
+    const [pageCount, setPageCount] = useState('');
 
     useEffect(() => {
         dispatch(initializeBooks());
@@ -33,15 +33,36 @@ const Books = () => {
         setGenre(newGenre);
     };
 
-    const filteredBooks = genre ? allBooks.filter(book => book.genre === genre) : allBooks;
+    const handlePageCountChange = (newPageCount) => {
+        setPageCount(newPageCount);
+    }
+
+
+    const getFilteredBooksByPageCount = (books, pageCountRange) => {
+        if (!pageCountRange) return books;
+
+        if (pageCountRange === "500+") {
+            return books.filter(book => book.pageCount >= 500);
+        }
+
+        const [minPages, maxPages] = pageCountRange.split('-').map(Number);
+        return books.filter(book => book.pageCount >= minPages && book.pageCount <= maxPages);
+    };
+
+    let filteredBooks = allBooks;
+    if (genre) {
+        filteredBooks = filteredBooks.filter(book => book.genre === genre);
+    }
+    filteredBooks = getFilteredBooksByPageCount(filteredBooks, pageCount);
 
     return (
         <>
             <Text />
             <SearchBar />
-            <FilterByCriteria onGenreChange={handleGenreChange} />
+            <FilterByGenre onGenreChange={handleGenreChange} />
+            <FilterByPageCount onPageCountChange={handlePageCountChange} />
             <Box sx={{ height: '1000px' }}>
-                <div style={{ marginLeft: 400, marginTop: 80 }}>
+                <div style={{ marginLeft: 400 }}>
                     {filteredBooks.map(b => (
                         <div key={b.id} style={{ marginBottom: '50px' }}>
                             <BookCardModel bookId={b.id} />
