@@ -1,11 +1,11 @@
-import Autocomplete from '@mui/material/Autocomplete';
 import { Link } from 'react-router-dom';
-import { TextField, Card, Typography } from '@mui/material';
+import { TextField, Card, Typography, Autocomplete, Box, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { initializeBooks } from '../../../reducers/bookReducer';
+import PropTypes from 'prop-types';
 
 export const SearchBar = () => {
     const [jsonResults, setJsonResults] = useState([]);
@@ -46,6 +46,7 @@ export const SearchBar = () => {
                 )}
                 renderOption={(props, option) => {
                     const { title, author } = option;
+                    // eslint-disable-next-line react/prop-types
                     const { key, ...restProps } = props;
                     return (
                         <Link key={option.id} to={`/books/${option.id}`} style={{ textDecoration: 'none' }}>
@@ -59,3 +60,39 @@ export const SearchBar = () => {
         </Card>
     );
 };
+
+export const FilterByCriteria = ({ onGenreChange }) => {
+    const [genre, setGenre] = useState('');
+
+    const handleGenreChange = (event) => {
+        setGenre(event.target.value);
+        onGenreChange(event.target.value); // Notify the parent component of the genre change
+    };
+
+    return (
+        <Box sx={{ minWidth: 120, ml: 200, mt: -7 }}>
+            <FormControl fullWidth>
+                <InputLabel id="genre-select-label">Genre</InputLabel>
+                <Select
+                    labelId="genre-select-label"
+                    id="genre-select"
+                    value={genre}
+                    label="Genre"
+                    onChange={handleGenreChange}
+                >
+                    <MenuItem value="">
+                        <em>None</em>
+                    </MenuItem>
+                    <MenuItem value="Fantasy">Fantasy</MenuItem>
+                    <MenuItem value="Sci-Fi">Sci-Fi</MenuItem>
+                    <MenuItem value="Mystery">Mystery</MenuItem>
+                    {/* Add more genres as needed */}
+                </Select>
+            </FormControl>
+        </Box>
+    );
+}
+
+FilterByCriteria.propTypes = {
+    onGenreChange: PropTypes.func.isRequired,
+}

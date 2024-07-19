@@ -1,9 +1,10 @@
 import { Box, Typography, Divider } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { initializeBooks } from '../../../reducers/bookReducer';
 import BookCardModel from './BookCardModel';
-import { SearchBar } from './FilterBooks';
+import { SearchBar, FilterByCriteria } from './FilterBooks';
+
 
 const Text = () => {
     return (
@@ -19,33 +20,36 @@ const Text = () => {
     );
 }
 
-const FetchBooks = () => {
+const Books = () => {
     const dispatch = useDispatch();
-    const books = useSelector((state) => state.books)
+    const allBooks = useSelector((state) => state.books);
+    const [genre, setGenre] = useState('');
 
     useEffect(() => {
         dispatch(initializeBooks());
     }, [dispatch]);
 
-    return (
-        <div style={{ marginLeft: 400, marginTop: 80 }}>
-            {books.map(b => (
-                <div key={b.id} style={{ marginBottom: '50px' }}>
-                    <BookCardModel bookId={b.id} />
-                </div>
-            ))}
-        </div>
-    );
-}
+    const handleGenreChange = (newGenre) => {
+        setGenre(newGenre);
+    };
 
+    const filteredBooks = genre ? allBooks.filter(book => book.genre === genre) : allBooks;
 
-const Books = () => {
     return (
-        <div>
+        <>
             <Text />
             <SearchBar />
-            <FetchBooks />
-        </div>
+            <FilterByCriteria onGenreChange={handleGenreChange} />
+            <Box sx={{ height: '1000px' }}>
+                <div style={{ marginLeft: 400, marginTop: 80 }}>
+                    {filteredBooks.map(b => (
+                        <div key={b.id} style={{ marginBottom: '50px' }}>
+                            <BookCardModel bookId={b.id} />
+                        </div>
+                    ))}
+                </div>
+            </Box>
+        </>
     );
 }
 
