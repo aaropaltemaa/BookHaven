@@ -31,7 +31,7 @@ const userSchema = mongoose.Schema({
       status: {
         type: String,
         required: true,
-        enum: ["currently reading", "finished", "plan to read"], // This ensures the status is one of the specified values
+        enum: ["currently reading", "finished", "plan to read"],
       },
     },
   ],

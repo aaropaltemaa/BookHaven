@@ -30,6 +30,8 @@ loginRouter.post("/", async (req, res) => {
     username: user.username,
     firstName: user.firstName,
     lastName: user.lastName,
+    email: user.email,
+    id: user._id,
   });
 });
 
