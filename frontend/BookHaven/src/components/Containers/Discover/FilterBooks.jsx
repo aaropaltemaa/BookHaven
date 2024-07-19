@@ -25,7 +25,7 @@ export const SearchBar = () => {
     }, [dispatch]);
 
     return (
-        <Card sx={{ ml: "320px", width: "50%", mt: "60px" }}>
+        <Card sx={{ ml: "320px", width: "50%", mt: "40px" }}>
             <Autocomplete
                 id="search-bar"
                 options={jsonResults}
