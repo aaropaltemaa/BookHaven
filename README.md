@@ -12,15 +12,6 @@ A feature to explore new books, including recommendations based on the user's re
 
 ## User Profiles 
 Create and manage personal profiles with details such as name, age, and reading preferences.
-
-## Book Listing 
-Maintain lists of books you own, have read, or want to read using simple and intuitive controls.
-
-## Search
-A tool to search for books by title, author, ISBN, or keywords.
-
-## Discover New Books 
-Explore recommendations based on genres, authors, or community favorites.
   
 ## Personalized Dashboard 
 View personalized recommendations, reading progress, and community updates on your dashboard.
