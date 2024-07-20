@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { initializeLibrary } from '../../../reducers/libraryReducer';
 import LibraryBookCardModel from './LibraryBookCardModel';
+import BookDialog from './BookDialog'; // Assuming BookDialog is in the same directory
 import { Box, Typography, Divider } from "@mui/material";
 
 const Text = () => {
@@ -34,10 +35,15 @@ const Library = () => {
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left', width: '80%', margin: '0 auto', marginLeft: "320px", marginBottom: "80px" }}>
             <Text />
-            <Box sx={{ marginTop: '20px', width: '100%' }}>
-                {library.map(book => (
-                    <LibraryBookCardModel key={book.id} bookId={book.id} status={book.status} />
-                ))}
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                <Box sx={{ marginTop: '20px', width: '100%' }}>
+                    {library.map(book => (
+                        <LibraryBookCardModel key={book.id} bookId={book.id} status={book.status} />
+                    ))}
+                </Box>
+                <Box sx={{ marginTop: "55px", marginRight: "100px" }}>
+                    <BookDialog />
+                </Box>
             </Box>
         </Box>
     );
