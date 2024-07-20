@@ -7,7 +7,6 @@ const BookCardModel = ({ bookId }) => {
     const book = useSelector((state) => state.books.find((book) => book.id === bookId));
 
     if (!book) {
-
         return null;
     }
 

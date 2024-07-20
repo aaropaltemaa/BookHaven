@@ -3,12 +3,25 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const LibraryBookCardModel = ({ bookId }) => {
+const LibraryBookCardModel = ({ bookId, status }) => {
     const book = useSelector((state) => state.library.find((book) => book.id === bookId));
 
     if (!book) {
         return null;
     }
+
+    const getStatusStyle = (status) => {
+        switch (status) {
+            case "currently reading":
+                return { color: 'orange' };
+            case "finished":
+                return { color: 'green' };
+            case "plan to read":
+                return { color: 'blue' };
+            default:
+                return { color: 'grey' };
+        }
+    };
 
     const publishedDate = new Date(book.publishedDate);
 
@@ -19,10 +32,10 @@ const LibraryBookCardModel = ({ bookId }) => {
     });
 
     return (
-        <Grid container spacing={3} alignItems="center" style={{ marginLeft: 300, marginTop: 20 }}>
+        <Grid container spacing={3} sx={{ marginLeft: -3, marginTop: 2, width: '100%' }}>
             <Grid item xs={3}>
                 <Link to={`/books/${book.id}`} style={{ textDecoration: 'none' }}>
-                    <img src={book.coverImage} alt={book.title} style={{ width: '35%' }} />
+                    <img src={book.coverImage} alt={book.title} style={{ width: '60%' }} />
                 </Link>
             </Grid>
             <Grid item xs={9}>
@@ -43,6 +56,11 @@ const LibraryBookCardModel = ({ bookId }) => {
                         Read more
                     </Typography>
                 </Link>
+                <Grid container justifyContent="flex-end">
+                    <Typography variant="body2" style={getStatusStyle(status)}>
+                        Status: {status}
+                    </Typography>
+                </Grid>
             </Grid>
         </Grid>
     );
@@ -50,6 +68,7 @@ const LibraryBookCardModel = ({ bookId }) => {
 
 LibraryBookCardModel.propTypes = {
     bookId: PropTypes.string.isRequired,
-}
+    status: PropTypes.string.isRequired,
+};
 
 export default LibraryBookCardModel;

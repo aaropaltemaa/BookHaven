@@ -6,7 +6,7 @@ import { Box, Typography, Divider } from "@mui/material";
 
 const Text = () => {
     return (
-        <Box sx={{ marginTop: "40px", display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginLeft: '320px' }}>
+        <Box sx={{ marginTop: "40px", display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%' }}>
             <Typography variant="h2" color="primary" gutterBottom>
                 My Library
             </Typography>
@@ -32,15 +32,14 @@ const Library = () => {
     }
 
     return (
-        <div >
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left', width: '80%', margin: '0 auto', marginLeft: "320px", marginBottom: "80px" }}>
             <Text />
-            <Box sx={{ height: "1000px" }}>
-
+            <Box sx={{ marginTop: '20px', width: '100%' }}>
                 {library.map(book => (
-                    <LibraryBookCardModel key={book.id} bookId={book.id} />
+                    <LibraryBookCardModel key={book.id} bookId={book.id} status={book.status} />
                 ))}
             </Box>
-        </div>
+        </Box>
     );
 };
 
