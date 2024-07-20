@@ -6,7 +6,7 @@ libraryRouter.get("/:userId", async (req, res) => {
     const { userId } = req.params;
     const { status } = req.query;
 
-    const user = await User.findById(userId).populate("books", {
+    const user = await User.findById(userId).populate("books.book", {
       title: 1,
       author: 1,
       genre: 1,
@@ -23,10 +23,15 @@ libraryRouter.get("/:userId", async (req, res) => {
 
     let filteredBooks = user.books;
     if (status) {
-      filteredBooks = user.books.filter((book) => book.status === status);
+      filteredBooks = user.books.filter(
+        (bookEntry) => bookEntry.status === status
+      );
     }
 
-    const booksDetails = filteredBooks.map((book) => book.book);
+    const booksDetails = filteredBooks.map((bookEntry) => ({
+      ...bookEntry.book.toJSON(), // Convert the Mongoose document to a plain JavaScript object
+      status: bookEntry.status, // Include the status in the response
+    }));
 
     res.json(booksDetails);
   } catch (error) {
