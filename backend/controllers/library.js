@@ -39,4 +39,31 @@ libraryRouter.get("/:userId", async (req, res) => {
   }
 });
 
+libraryRouter.delete("/:userId/books/:bookId", async (req, res) => {
+  try {
+    const { userId, bookId } = req.params;
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: "user not found" });
+    }
+
+    const bookIndex = user.books.findIndex(
+      (bookEntry) => bookEntry.book.toString() === bookId
+    );
+
+    if (bookIndex === -1) {
+      return res.status(404).json({ error: "book not found" });
+    }
+
+    user.books.splice(bookIndex, 1);
+    await user.save();
+
+    res.status(204).end();
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = libraryRouter;

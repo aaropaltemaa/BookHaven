@@ -91,6 +91,13 @@ usersRouter.post("/:id/books", async (req, res) => {
     return res.status(404).json({ error: "book not found" });
   }
 
+  if (
+    !status ||
+    !["currently reading", "finished", "plan to read"].includes(status)
+  ) {
+    return res.status(400).json({ error: "invalid status" });
+  }
+
   // Create a new object that includes all book properties and the status
   const bookEntry = {
     book: book.toJSON(), // Convert the Mongoose document to a plain JavaScript object
